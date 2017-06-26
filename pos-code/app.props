@@ -1,0 +1,5 @@
+pos_env=qa
+password.file=test
+start_date=20170103
+days=30
+datesfile=sqoop-dates.txt

@@ -1,0 +1,2 @@
+10 * * * * /home/ambari-qa/pos-code/dte-dataloading.sh qa > /home/ambari-qa/dte-pos/logs/`date +\%Y\%m\%d\%H\%M\%S`-dte-dataloading.log 2>&1
+10 * * * * /home/ambari-qa/pos-code/event-dataloading.sh qa > /home/ambari-qa/event-pos/logs/`date +\%Y\%m\%d\%H\%M\%S`-event-dataloading.log 2>&1
