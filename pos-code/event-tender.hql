@@ -2,42 +2,20 @@
 set hivevar:POS_ENV=qa;
 create database if not exists ${hivevar:POS_ENV};
 
--- MSMQ Transactions Raw Table
-drop table ${hivevar:POS_ENV}.event_pos_raw_trans;
-CREATE EXTERNAL TABLE ${hivevar:POS_ENV}.event_pos_raw_trans(
+-- MSMQ Tender Raw Table
+drop table ${hivevar:POS_ENV}.event_pos_raw_tender;
+CREATE EXTERNAL TABLE ${hivevar:POS_ENV}.event_pos_raw_tender(
 RAW_RECORD string,
-LOYALTY_NUM string,
-OPERATOR_ID string,
-STORE_ID int,
-TERMINAL_ID string,
-TRANSACTION_ID int,
-TRANSACTION_TOTAL double,
-TRANS_DATE string,
-TRANS_TYPE string,
-Loyalty_Bonus_Points int,
-Loyalty_Message string,
-Loyalty_Points int,
-Loyalty_TransAmt  double,
-AMOUNT double,
-ENTRY_METHOD string,
-BASE_UNIT_PRICE double,
-ITEM_CODE string,
-LINE_ID int,
-ITEM_NAME string,
-OLA_PRODUCT_CODE string,  --BARCODE
-PUMP_ID int,
-PUMP_SERVER_REF string,
-QUANTITY double,
-TAX_AMOUNT double,
-UNIT_PRICE double,
-WEIGHT double,
-BASE_AMOUNT double,
-DeptId int,
-PromoPrice double,
-PromoType string,
-SubDeptId int
+Amount double,
+EntryMethod string,
+Approval int,
+AuthNumber int,
+FullCardName string,
+AccountNumber int,
+TruckCompanyName string,
+OLATenderKey string
 )
-COMMENT 'Real Time POS event -Raw'
+COMMENT 'Real Time POS Tender -Raw'
 PARTITIONED BY (
   date_part string,
   hour_part string)
@@ -46,11 +24,11 @@ fields terminated by '|'
 lines terminated by '\n'
 null DEFINED as ''
   STORED as TEXTFILE
-  location "/${hivevar:POS_ENV}/landing/event/raw/trans";
+  location "/${hivevar:POS_ENV}/landing/event/raw/Tender";
 
--- MSMQ Transaction Staging Table
-drop table ${hivevar:POS_ENV}.event_pos_staging_trans;
-CREATE EXTERNAL TABLE ${hivevar:POS_ENV}.event_pos_staging_trans(
+-- MSMQ Tender Staging Table
+drop table ${hivevar:POS_ENV}.event_pos_staging_tender;
+CREATE EXTERNAL TABLE ${hivevar:POS_ENV}.event_pos_staging_tender(
 LOYALTY_NUM string,
 OPERATOR_ID string,
 STORE_ID int,
