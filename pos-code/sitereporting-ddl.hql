@@ -73,7 +73,7 @@ CREATE EXTERNAL TABLE ${hivevar:POS_ENV}.sitereporting_raw_header(
 )
 COMMENT 'SiteReporting Detail Raw'
 PARTITIONED BY (
-FacilityAreaId string)
+FacilityAreaId)
 row format DELIMITED
 fields terminated by ','
 lines terminated by '\n'
